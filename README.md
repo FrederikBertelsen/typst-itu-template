@@ -2,7 +2,16 @@
 
 Academic document template for [IT University of Copenhagen](https://itu.dk/), built with [Typst](https://typst.app/).
 
-[View example PDF output](main.pdf)
+<p align="center">
+   <a href="main.pdf">
+      <img src="docs/example-page-01.png" width="250" alt="thumbnail" />
+      <img src="docs/example-page-09.png" width="250" alt="thumbnail" />
+      <img src="docs/example-page-13.png" width="250" alt="thumbnail" />
+   </a>
+</p>
+<p align="center" style="margin-top:0px;">
+   <a href="main.pdf">View example PDF output</a>
+</p>
 
 ## Features
 - Customizable title page
@@ -19,7 +28,7 @@ Academic document template for [IT University of Copenhagen](https://itu.dk/), b
    - Download from [Google Fonts](https://fonts.google.com/specimen/Open+Sans) if needed
 
 2. **Configure your document**
-   - Edit the project parameters in [`main.typ`](main.typ) to set your details:
+   - Edit the project parameters in [`main.typ`](template/main.typ) to set your details:
      ```typst
      #show: project.with(
        department: "Department",
@@ -36,10 +45,10 @@ Academic document template for [IT University of Copenhagen](https://itu.dk/), b
 
 3. **Write your content**
    - The sections are split into files for organization (see the `sections` folder)
-   - you can include new sections by adding them to the [`main.typ`](main.typ) file
+   - you can include new sections by adding them to the [`main.typ`](template/main.typ) file
 
 > [!NOTE]
-> You can enable dark mode if you prefer while you're working.
+> You can enable dark mode in [`main.typ`](template/main.typ) if you prefer while you're working.
 
 ## Get Started with Typst
 
@@ -62,13 +71,13 @@ Academic document template for [IT University of Copenhagen](https://itu.dk/), b
 ## Working with References
 
 ### Bibliography
-- Add references to [`bib.yaml`](bib.yaml)
+- Add references to [`bib.yaml`](template/bib.yaml)
 - Reference in text using `@citation_key` or `#ref(<citation_key>)`
 - Bibliography generated automatically at document end
 - Supports articles, books, proceedings, web resources, and more
 
 ### Glossary
-- Define terms in [`glossary.yaml`](glossary.yaml) with short/long forms and descriptions
+- Define terms in [`glossary.yaml`](template/glossary.yaml) with short/long forms and descriptions
 - Reference terms using `@term_key` syntax
 - First usage shows full form, subsequent uses show short form
 - Force full form with `#gls("term_key", long: true)`
