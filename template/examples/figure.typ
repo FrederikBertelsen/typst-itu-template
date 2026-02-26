@@ -3,7 +3,7 @@
 == Basic Image Figures
 // Basic figure with image
 #figure(
-  image("../figures/Business.jpg", width: 70%),
+  image("../figures/example-figure.jpg", width: 70%),
   caption: "Basic image figure with caption.",
 ) <basic-fig>
 
@@ -51,11 +51,11 @@ See @table-fig for the data values.
     columns: 2,
     gutter: 1em,
     figure(
-      image("../figures/Business.jpg", width: 100%),
+      image("../figures/example-figure.jpg", width: 100%),
       caption: "First subfigure",
     ),
     figure(
-      image("../figures/Business.jpg", width: 100%),
+      image("../figures/example-figure.jpg", width: 100%),
       caption: "Second subfigure",
     ),
   ),

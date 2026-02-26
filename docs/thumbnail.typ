@@ -6,12 +6,12 @@
 #let theme = sys.inputs.at("theme", default: "light") == "dark";
 
 #show: academic-document.with(
-  dark_mode: theme,
+  dark-mode: theme,
 
   department: "Department of Computer Science",
-  course_name: "Course Name",
-  course_code: "Course Code",
-  document_type: "Document Type",
+  course-name: "Course Name",
+  course-code: "Course Code",
+  document-type: "Document Type",
 
   title: "A Typst Template for ITU",
 
@@ -33,7 +33,7 @@
       email: "jebr@itu.dk",
     ),
   ),
-  author_columns: 2,
+  author-columns: 2,
 
   advisers: (
     (
@@ -49,7 +49,7 @@
       email: "rowi@itu.dk",
     ),
   ),
-  adviser_columns: 3,
+  adviser-columns: 3,
 
-  // abstract: include "../template/sections/0_abstract.typ",
+  // abstract: include "../template/sections/0-abstract.typ",
 )

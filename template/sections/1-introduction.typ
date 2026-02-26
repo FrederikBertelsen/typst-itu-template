@@ -1,9 +1,9 @@
 // this is needed to make the glossary work
-#import "@preview/glossarium:0.5.6": *
+#import "@preview/glossarium:0.5.10": *
 
 = Introduction <introduction>
 You can reference sections (_analysis_ for example):
-- *By section*: #ref(<analysis>). 
+- *By section*: #ref(<analysis>).
 - *By page*: #ref(<analysis>, form: "page").
 
 == References
@@ -12,9 +12,9 @@ When using the glossary, only the first reference will be in full form (unless s
 - *Here is the first reference*: @ai
 - *Here is the second reference*: @ai
 - *Here is the third reference*: @ai
-- *Here is a forced full reference*: #gls("ai", long: true)
+- *Here is a forced full reference*: #gls("ai", first: true)
 - *Here is plural reference*: @ai:pl
-- *Here is a forced full plural reference*: #glspl("ai", long: true)
+- *Here is a forced full plural reference*: #glspl("ai", first: true)
 
 === Bibliography Explained
 You can reference the bibliography in the same way as the glossary.

@@ -8,12 +8,12 @@
 // --- Front page / document metadata ---
 
 #show: academic-document.with(
-  dark_mode: false,
+  dark-mode: false,
 
   department: "Department of Computer Science",
-  course_name: "Course Name",
-  course_code: "Course Code",
-  document_type: "Document Type",
+  course-name: "Course Name",
+  course-code: "Course Code",
+  document-type: "Document Type",
 
   title: "A Typst Template for ITU",
 
@@ -35,7 +35,7 @@
       email: "jebr@itu.dk",
     ),
   ),
-  author_columns: 2,
+  author-columns: 2,
 
   advisers: (
     (
@@ -51,21 +51,21 @@
       email: "rowi@itu.dk",
     ),
   ),
-  adviser_columns: 3,
+  adviser-columns: 3,
 
-  abstract: include "sections/0_abstract.typ",
+  abstract: include "sections/0-abstract.typ",
 )
 
 
 
 // --- Sections ---
 
-#include "sections/1_introduction.typ"
-#include "sections/2_background.typ"
-#include "sections/3_analysis.typ"
-#include "sections/4_discussion.typ"
-#include "sections/5_conclusion.typ"
-#include "sections/6_future_work.typ"
+#include "sections/1-introduction.typ"
+#include "sections/2-background.typ"
+#include "sections/3-analysis.typ"
+#include "sections/4-discussion.typ"
+#include "sections/5-conclusion.typ"
+#include "sections/6-future-work.typ"
 
 
 

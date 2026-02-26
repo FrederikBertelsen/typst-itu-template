@@ -35,7 +35,7 @@ An unofficial [Typst](https://typst.app/) template for [IT University of Copenha
    - Download from [Google Fonts](https://fonts.google.com/specimen/Open+Sans) if needed
 
 2. **Configure your document**
-   - Edit the project parameters in [`main.typ`](template/main.typ) to set your details:
+   - Edit the project parameters in `main.typ` to set your details:
      ```typst
      #show: academic-document.with(
        department: "Department of Computer Science",
@@ -57,7 +57,7 @@ An unofficial [Typst](https://typst.app/) template for [IT University of Copenha
 
 3. **Write your content**
    - The sections are split into files for organization (see the `sections` folder)
-   - you can include new sections by adding them to the [`main.typ`](template/main.typ) file
+   - you can include new sections by adding them to the `main.typ` file
 
 4. **Compile your document**
      ```bash
@@ -68,8 +68,7 @@ An unofficial [Typst](https://typst.app/) template for [IT University of Copenha
      typst watch main.typ
      ```
 
-> [!NOTE]
-> You can enable dark mode in [`main.typ`](template/main.typ) if you prefer while you're working.
+> **Note:** You can enable dark mode in `main.typ` if you prefer while you're working.
 
 ## Get Started with Typst
 
@@ -80,8 +79,7 @@ An unofficial [Typst](https://typst.app/) template for [IT University of Copenha
 - [Awesome Typst](https://github.com/qjcg/awesome-typst)
 
 ### Installation
-> [!NOTE]  
-> There is also an online editor for Typst at [typst.app](https://typst.app/)
+> **Note:** There is also an online editor for Typst at [typst.app](https://typst.app/)
 
 1. **Install Typst**
    - [Typst GitHub Repository](https://github.com/typst/typst?tab=readme-ov-file#installation)
@@ -92,13 +90,13 @@ An unofficial [Typst](https://typst.app/) template for [IT University of Copenha
 ## Working with References
 
 ### Bibliography
-- Add references to [`bib.yaml`](template/bib.yaml)
+- Add references to `bib.yaml`
 - Reference in text using `@citation_key` or `#ref(<citation_key>)`
 - Bibliography generated automatically at document end
 - Supports articles, books, proceedings, web resources, and more
 
 ### Glossary
-- Define terms in [`glossary.yaml`](template/glossary.yaml) with short/long forms and descriptions
+- Define terms in `glossary.yaml` with short/long forms and descriptions
 - Reference terms using `@term_key` syntax
 - First usage shows full form, subsequent uses show short form
 - Force full form with `#gls("term_key", long: true)`
