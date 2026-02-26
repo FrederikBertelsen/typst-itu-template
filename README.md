@@ -1,69 +1,82 @@
-# The `my-package` Package
-<div align="center">Version 0.1.0</div>
+# ITU Typst Template for Academic Documents
 
-A short description about the project and/or client.
+Academic document template for [IT University of Copenhagen](https://itu.dk/), built with [Typst](https://typst.app/).
 
-## Template adaptation checklist
+[View example PDF output](main.pdf)
 
-- [ ] Fill out `README.md`
-  - Change the `my-package` package name, including code snippets
-  - Check section contents and/or delete sections that don't apply
-- [ ] Check and/or replace `LICENSE` by something that suits your needs
-- [ ] Fill out `typst.toml`
-  - See also the [typst/packages README](https://github.com/typst/packages/?tab=readme-ov-file#package-format)
-- [ ] Adapt Repository URLs in `CHANGELOG.md`
-  - Consider only committing that file with your first release, or removing the "Initial Release" part in the beginning
-- [ ] Adapt or deactivate the release workflow in `.github/workflows/release.yml`
-  - to deactivate it, delete that file or remove/comment out lines 2-4 (`on:` and following)
-  - to use the workflow
-    - [ ] check the values under `env:`, particularly `REGISTRY_FORK`
-    - [ ] if you don't have one, [create a fine-grained personal access token](https://github.com/settings/tokens?type=beta) with [only Contents permission](https://stackoverflow.com/a/75116350/371191) for the `REGISTRY_FORK`
-    - [ ] on this repo, create a secret `REGISTRY_TOKEN` (at `https://github.com/[user]/[repo]/settings/secrets/actions`) that contains the so created token
-
-    if configured correctly, whenever you create a tag `v...`, your package will be pushed onto a branch on the `REGISTRY_FORK`, from which you can then create a pull request against [typst/packages](https://github.com/typst/packages/)
-- [ ] remove/replace the example test case
-- [ ] (add your actual code, docs and tests)
-- [ ] remove this section from the README
+## Features
+- Customizable title page
+- Automatic table of contents
+- bibliography system for sources and references
+- Glossary system for technical terms
+- Dark mode
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on the typst web app. Perhaps a short code example on importing the package and a very simple teaser usage.
+1. **Font Installation (optional)**
+   - The template uses Open Sans (ITU's logo font) for the title page
+   - The template will fall back to system fonts if Open Sans isn't installed
+   - Download from [Google Fonts](https://fonts.google.com/specimen/Open+Sans) if needed
 
-```typ
-#import "@preview/my-package:0.1.0": *
+2. **Configure your document**
+   - Edit the project parameters in [`main.typ`](main.typ) to set your details:
+     ```typst
+     #show: project.with(
+       department: "Department",
+       course_name: "Course Name",
+       course_code: "Course Code",
+       document_type: "Document Type",
+       title: "Your Document Title",
+       authors: (...),
+       max_author_columns: 2,
+       advisers: (...),
+       max_adviser_columns: 3,
+     )
+     ```
 
-#show: my-show-rule.with()
-#my-func()
-```
+3. **Write your content**
+   - The sections are split into files for organization (see the `sections` folder)
+   - you can include new sections by adding them to the [`main.typ`](main.typ) file
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./thumbnail-dark.svg">
-  <img src="./thumbnail-light.svg">
-</picture>
+> [!NOTE]
+> You can enable dark mode if you prefer while you're working.
+
+## Get Started with Typst
+
+### Resources
+- [Typst for LaTeX users](https://typst.app/docs/guides/guide-for-latex-users/)
+- [Official Typst Documentation](https://typst.app/docs)
+- [Typst Examples Book](https://sitandr.github.io/typst-examples-book/book/)
+- [Awesome Typst](https://github.com/qjcg/awesome-typst)
 
 ### Installation
+> [!NOTE]  
+> There is also an online editor for Typst at [typst.app](https://typst.app/)
 
-A step by step guide that will tell you how to get the development environment up and running. This should explain how to clone the repo and where to (maybe a link to the typst documentation on it), along with any pre-requisite software and installation steps.
+1. **Install Typst**
+   - [Typst GitHub Repository](https://github.com/typst/typst?tab=readme-ov-file#installation)
+   
+2. **Editor Integration**
+   - [TinyMist Extension](https://github.com/Myriad-Dreamin/tinymist?tab=readme-ov-file#installation) for VSCode, NeoVim, etc.
 
-```
-$ First step
-$ Another step
-$ Final step
-```
+## Working with References
 
-## Usage
+### Bibliography
+- Add references to [`bib.yaml`](bib.yaml)
+- Reference in text using `@citation_key` or `#ref(<citation_key>)`
+- Bibliography generated automatically at document end
+- Supports articles, books, proceedings, web resources, and more
 
-A more in-depth description of usage. Any template arguments? A complicated example that showcases most if not all of the functions the package provides? This is also an excellent place to signpost the manual.
+### Glossary
+- Define terms in [`glossary.yaml`](glossary.yaml) with short/long forms and descriptions
+- Reference terms using `@term_key` syntax
+- First usage shows full form, subsequent uses show short form
+- Force full form with `#gls("term_key", long: true)`
+- Use plural forms with `@term_key:pl` or `#glspl("term_key")`
 
-```typ
-#import "@preview/my-package:0.1.0": *
 
-#let my-complicated-example = ...
-```
+## Credits
+This template is built on the foundation provided by [Simple Typst Thesis](https://github.com/zagoli/simple-typst-thesis/) by Zagoli. 
+The original work has been expanded with additional features, and ITU-specific styling.
 
-## Additional Documentation and Acknowledgments
 
-* Project folder on server:
-* Confluence link:
-* Asana board:
-* etc...
