@@ -1,6 +1,8 @@
 # ITU Typst Template for Academic Documents
-
 Academic document template for [IT University of Copenhagen](https://itu.dk/), built with [Typst](https://typst.app/).
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Typst Universe](https://img.shields.io/badge/typst-universe-239DAD)](https://typst.app/universe/package/itu-academic-document)
 
 <p align="center">
    <a href="main.pdf">
@@ -10,15 +12,20 @@ Academic document template for [IT University of Copenhagen](https://itu.dk/), b
    </a>
 </p>
 <p align="center" style="margin-top:0px;">
-   <a href="main.pdf">View example PDF output</a>
+   <a href="docs/example.pdf">View example PDF output</a>
 </p>
 
 ## Features
-- Customizable title page
-- Automatic table of contents
-- bibliography system for sources and references
-- Glossary system for technical terms
-- Dark mode
+- **Title page** with department, course, document type, authors, and advisers
+- **Abstract page** with Roman numeral page numbering
+- **Table of contents** (up to 3 levels deep)
+- **Dynamic page headers** that reflect the current section and subsection
+- **Footer** with total-page count (e.g. `1 / 12`) and ITU logo
+- **Bibliography** via `bib.yaml` — IEEE style, supports articles, books, proceedings, and more
+- **Glossary** via `glossary.yaml` — automatic first-use expansion with short/long forms
+- **PDF metadata** — author names and title embedded in the output PDF
+- **Automatic section page breaks**
+- **Dark mode**
 
 ## Getting Started
 
@@ -30,22 +37,36 @@ Academic document template for [IT University of Copenhagen](https://itu.dk/), b
 2. **Configure your document**
    - Edit the project parameters in [`main.typ`](template/main.typ) to set your details:
      ```typst
-     #show: project.with(
-       department: "Department",
+     #show: academic-document.with(
+       department: "Department of Computer Science",
        course_name: "Course Name",
        course_code: "Course Code",
        document_type: "Document Type",
        title: "Your Document Title",
-       authors: (...),
-       max_author_columns: 2,
-       advisers: (...),
-       max_adviser_columns: 3,
+       authors: (
+         (name: "Jane Doe", email: "jado@itu.dk"),
+         (name: "John Smith", email: "josm@itu.dk"),
+       ),
+       author_columns: 2,
+       advisers: (
+         (name: "Dr. John Smith", email: "jsmi@itu.dk"),
+       ),
+       adviser_columns: 3,
      )
      ```
 
 3. **Write your content**
    - The sections are split into files for organization (see the `sections` folder)
    - you can include new sections by adding them to the [`main.typ`](template/main.typ) file
+
+4. **Compile your document**
+     ```bash
+     typst compile main.typ
+     ```
+   - Or watch for changes and recompile automatically:
+     ```bash
+     typst watch main.typ
+     ```
 
 > [!NOTE]
 > You can enable dark mode in [`main.typ`](template/main.typ) if you prefer while you're working.
