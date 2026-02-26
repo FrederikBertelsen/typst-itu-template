@@ -1,5 +1,5 @@
 # ITU Typst Template for Academic Documents
-An unofficial Academic document template for [IT University of Copenhagen](https://itu.dk/), built with [Typst](https://typst.app/).
+An unofficial [Typst](https://typst.app/) template for [IT University of Copenhagen](https://itu.dk/).
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Typst Universe](https://img.shields.io/badge/typst-universe-239DAD)](https://typst.app/universe/package/itu-academic-document)
