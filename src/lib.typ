@@ -1,15 +1,7 @@
-#let build_main_header(content) = {
-  align(center, smallcaps(content))
-  line(length: 100%)
-}
+// ─── Header ───────────────────────────────────────────────────────────────────
 
-#let build_secondary_header(main_content, secondary_content) = {
-  smallcaps(main_content)
-  h(1fr)
-  emph(secondary_content)
-  line(length: 100%)
-}
-
+// Returns true if `secondary_heading` appears after `main_heading` in the
+// document (comparing page number, then vertical position).
 #let is_after(secondary_heading, main_heading) = {
   let sec_pos = secondary_heading.location().position()
   let main_pos = main_heading.location().position()
@@ -23,6 +15,27 @@
   }
 }
 
+// Renders a centered, small-caps header with a full-width rule beneath it.
+// Used when a level-1 heading starts on the current page.
+#let build_main_header(content) = {
+  align(center, smallcaps(content))
+  line(length: 100%)
+}
+
+// Renders a two-column header (chapter title left, section title right) with a
+// full-width rule beneath it. Used when a sub-heading is the most recent heading.
+#let build_secondary_header(main_content, secondary_content) = {
+  smallcaps(main_content)
+  h(1fr)
+  emph(secondary_content)
+  line(length: 100%)
+}
+
+// Selects the appropriate header for the current page at render time:
+//   - If a level-1 heading starts on this page, show it centered.
+//   - Otherwise, if the most recent sub-heading follows the most recent
+//     level-1 heading, show the two-column secondary format.
+//   - Otherwise, fall back to the centered level-1 heading.
 #let create_dynamic_header() = {
   let loc = here()
 
@@ -55,6 +68,10 @@
   }
 }
 
+// ─── Footer ───────────────────────────────────────────────────────────────────
+
+// Renders a full-width rule, a centered page counter, and a logo aligned to the
+// right. Pass `show_page_total: false` to show only the current page number.
 #let create_footer(logo_small, show_page_total: true) = {
   line(length: 100%)
   place(center + horizon)[
@@ -69,28 +86,10 @@
   place(right + horizon, image(logo_small, width: 10%))
 }
 
-// Document component functions
-#let setup_section_page_breaks(body) = {
-  let section_counter = counter("section-counter")
+// ─── Page components ──────────────────────────────────────────────────────────
 
-  show heading: it => {
-    if it.level == 1 {
-      let count = section_counter.get().at(0, default: 0)
-      section_counter.step()
-
-      if count > 0 {
-        pagebreak(weak: true)
-      }
-
-      it
-    } else {
-      it
-    }
-  }
-
-  body
-}
-
+// Renders the title page: logo, department, course, document type, title,
+// author grid, optional adviser grid, and date. Ends with a page break.
 #let create_title_page(
   logo,
   logo_width,
@@ -209,7 +208,8 @@
   pagebreak()
 }
 
-
+// Renders the abstract on its own page with roman-numeral page numbering,
+// resets the page counter to 1, then page-breaks into the TOC.
 #let create_abstract_page(abstract) = {
   set page(numbering: "I", number-align: center, margin: 10em)
   v(1fr)
@@ -221,11 +221,40 @@
   pagebreak()
 }
 
+// Renders the table of contents (up to depth 3) followed by a page break.
 #let create_toc_page() = {
   outline(depth: 3)
   pagebreak()
 }
 
+// ─── Body helpers ─────────────────────────────────────────────────────────────
+
+// Wraps `body` in a show rule that inserts a weak page break before every
+// level-1 heading after the first one, keeping sections on fresh pages.
+#let setup_section_page_breaks(body) = {
+  let section_counter = counter("section-counter")
+
+  show heading: it => {
+    if it.level == 1 {
+      let count = section_counter.get().at(0, default: 0)
+      section_counter.step()
+
+      if count > 0 {
+        pagebreak(weak: true)
+      }
+
+      it
+    } else {
+      it
+    }
+  }
+
+  body
+}
+
+// Validates and normalises a glossary dictionary (typically loaded from
+// `glossary.yaml`) into the list of entry dictionaries expected by the
+// glossarium package. Asserts on unknown keys or wrong value types.
 #let read-glossary-entries(entries) = {
   let file_name = "glossary.yaml"
 
@@ -296,8 +325,14 @@
     ))
 }
 
-// Main project function
-// This function is the main entry point for the document template.
+// ─── Main entry point ─────────────────────────────────────────────────────────
+
+// The top-level template function. Call this from `main.typ` to apply all
+// document styling and structure. Renders (in order):
+//   1. Title page
+//   2. Abstract page (roman numerals)
+//   3. Table of contents
+//   4. Body content with running header/footer (arabic numerals)
 #let academic-document(
   logo: "logo/logo.png",
   logo_dark_mode: "logo/logo_dark_mode.png",
@@ -321,20 +356,19 @@
   dark_mode: false,
   body,
 ) = {
-  // Document metadata and basic styling
+  // Document metadata and base typography
   set document(author: authors.map(a => a.name), title: title)
   show math.equation: it => set text(weight: 400)
   set heading(numbering: "1.1")
   set par(justify: true, first-line-indent: 20pt)
 
-  // dark mode
+  // Dark mode: invert page/text colours and adjust link and table stroke colours
   set page(fill: if dark_mode { black } else { white })
   set text(fill: if dark_mode { white } else { black })
   let link_fill = if dark_mode { blue.lighten(60%) } else { blue.darken(60%) }
   show link: set text(fill: link_fill)
   show ref: set text(fill: link_fill)
   set table(stroke: if dark_mode { white } else { black })
-
 
   // Create title page
   create_title_page(
@@ -359,7 +393,7 @@
   // Create table of contents
   create_toc_page()
 
-  // Configure main content
+  // Switch to arabic page numbers with running header and footer
   set page(
     header: context create_dynamic_header(),
     footer: context create_footer(
@@ -370,7 +404,7 @@
 
   counter(page).update(1)
 
-  set page(numbering: "1") // to change the numbering style, look at the 'create_footer' function
+  set page(numbering: "1") // to change the numbering style, look at `create_footer`
 
   // Apply section page breaks and render body
   if page_break_after_sections {
